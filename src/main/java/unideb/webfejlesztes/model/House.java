@@ -17,6 +17,10 @@ public class House {
     private int price;
     private double area;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User owner;
+
     public House(String address, int zip, int price, double area) {
         this.address = address;
         this.zip = zip;
