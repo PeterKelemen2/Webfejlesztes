@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WebfejlesztesApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebfejlesztesApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WebfejlesztesApplication.class, args);
+    }
+
 
 }

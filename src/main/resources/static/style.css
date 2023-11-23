@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("bg3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.registerButton {
+    background-color: transparent;
+    border-color: #1e1e1e;
+    color: #1e1e1e;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 30px;
+    width: 100px;
+    height: 30px;
+}
+
+.loginButton {
+    background-color: #1e1e1e;
+    color: rgb(239, 239, 239);
+    border-width: 1px;
+    border-color: transparent;
+    border-radius: 5px;
+    margin-left: 30px;
+    margin-right: 5px;
+    width: 100px;
+    height: 30px;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 200px;
+    padding: 20px;
+    border: 2px solid #1e1e1e;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+#inputContainer input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border-color: transparent;
+    border-width: 2px;
+    color: #ffffff;
+    background-color: rgba(7, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+#inputContainer input:focus {
+    border-color: aqua;
+}
+
+button:hover {
+    background-color: #3d3d3d;
+    border-color: transparent;
+    color: white;
+}

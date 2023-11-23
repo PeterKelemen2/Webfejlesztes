@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div id="container">
+    <div id="inputContainer">
+        <label for="username"></label><input type="text" id="username" placeholder="User Name">
+        <label for="password"></label><input type="password" id="password" placeholder="Password">
+    </div>
+
+    <div id="buttonContainer">
+        <button class="loginButton" onclick="loginSubmit()">Login</button>
+        <button class="registerButton" onclick="registerUser()">Register</button>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<script>
+    // var usernameValue = document.getElementById("username").value;
+    // var passwordValue = document.getElementById("password").value;
+
+    function loginSubmit() {
+        const usernameValue = document.getElementById("username").value;
+        const passwordValue = document.getElementById("password").value;
+
+        if (usernameValue === "Peti" && passwordValue === "jelszo") {
+            alert("Welcome, " + usernameValue + "!")
+        } else {
+            alert("Try again!")
+        }
+    }
+
+    function registerUser() {
+        if (usernameValue !== "" || passwordValue !== "") {
+            alert("Please give information to register")
+        } else {
+            alert("Registered!")
+        }
+    }
+</script>
