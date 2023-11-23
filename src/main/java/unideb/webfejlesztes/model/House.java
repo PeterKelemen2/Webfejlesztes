@@ -6,11 +6,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Table(name = "houses")
 @NoArgsConstructor
 public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(unique = true)
     private String address;
     private int zip;
