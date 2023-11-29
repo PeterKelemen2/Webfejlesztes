@@ -24,21 +24,21 @@ public class HouseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createHouse(){
-        return ResponseEntity.ok().build();
+    public void createHouse(@RequestBody HouseDTO body) {
+        houseService.createHouse(body);
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getHouse(@PathVariable String id) {
-        var hous = houseService.getHouseById(Long.parseLong(id));
-        if (hous == null) throw new RuntimeException("nincs vityilló");
-        return ResponseEntity.ok(HouseDTO.fromDao(hous));
+        var house = houseService.getHouseById(Long.parseLong(id));
+        if (house == null) throw new RuntimeException("Error");
+        return ResponseEntity.ok(HouseDTO.fromDao(house));
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateHouse(@PathVariable String id, @RequestBody HouseDTO body) {
         var house = houseService.getHouseById(Long.parseLong(id));
-        if (house == null) throw new RuntimeException("nincs vityilló");
+        if (house == null) throw new RuntimeException("Error");
 
         house.setHouseNum(body.number());
         house.setPrice(body.price());
@@ -50,6 +50,7 @@ public class HouseController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteHouse(@PathVariable String id) {
+        houseService.deleteHouseById(Long.parseLong(id));
         return ResponseEntity.ok().build();
     }
 }
