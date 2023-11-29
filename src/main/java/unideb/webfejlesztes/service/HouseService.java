@@ -25,4 +25,8 @@ public class HouseService {
     public House getHouseById(long l) {
         return houseRepository.findById(l).orElse(null);
     }
+
+    public void save(House house) {
+        houseRepository.save(house);
+    }
 }
