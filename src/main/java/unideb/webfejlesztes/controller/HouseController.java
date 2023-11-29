@@ -1,16 +1,15 @@
 package unideb.webfejlesztes.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import unideb.webfejlesztes.model.House;
-import unideb.webfejlesztes.repository.HouseRepository;
+import unideb.webfejlesztes.dto.HouseDTO;
 import unideb.webfejlesztes.service.HouseService;
 
-import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/houses")
 public class HouseController {
@@ -18,10 +17,13 @@ public class HouseController {
     private HouseService houseService;
 
     @GetMapping("/house-list")
-    public List<House> getHouses(){
-        // TODO: AAAAAAAAAAAAA
-        List<House> myHouses = houseService.getHouse();
-        return myHouses;
+    public ResponseEntity<?> getHouses(){
+        var h = houseService.getHouse();
+        log.info("anyad: {}", h);
+        return ResponseEntity.ok(h.stream()
+                .map(HouseDTO::fromDao)
+                .toList()
+        );
     }
 
 

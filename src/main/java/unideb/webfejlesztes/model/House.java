@@ -2,9 +2,12 @@ package unideb.webfejlesztes.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "houses")
 @NoArgsConstructor
