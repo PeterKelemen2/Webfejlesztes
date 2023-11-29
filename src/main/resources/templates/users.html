@@ -13,14 +13,22 @@
         <h2>Manage users</h2>
     </div>
     <div>
-        <table>
-            <thead>
+        <table class="table table-bordered">
+            <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th></th>
                 </tr>
             </thead>
+            <tbody>
+            <th:block th:each="user : ${userList}">
+                <tr>
+                    <td>[[${user.id}]]</td>
+                    <td>[[${user.username}]]</td>
+                </tr>
+            </th:block>
+            </tbody>
         </table>
     </div>
 </div>
