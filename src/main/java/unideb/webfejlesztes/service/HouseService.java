@@ -21,4 +21,8 @@ public class HouseService {
     public List<House> getHouse() {
         return houseRepository.findAll();
     }
+
+    public House getHouseById(long l) {
+        return houseRepository.findById(l).orElse(null);
+    }
 }
