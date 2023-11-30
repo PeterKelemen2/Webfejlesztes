@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import unideb.webfejlesztes.dto.HouseDTO;
 import unideb.webfejlesztes.model.House;
+import unideb.webfejlesztes.model.User;
 import unideb.webfejlesztes.repository.HouseRepository;
 
 import java.util.List;
@@ -25,6 +26,10 @@ public class HouseService {
 
     public House getHouseById(long l) {
         return houseRepository.findById(l).orElse(null);
+    }
+
+    public List<House> getHouseByOwnerId(User user){
+        return houseRepository.findAllByOwner(user);
     }
 
     public void save(House house) {

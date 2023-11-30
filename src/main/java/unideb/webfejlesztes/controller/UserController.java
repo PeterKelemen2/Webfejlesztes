@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import unideb.webfejlesztes.dto.UserDTO;
+import unideb.webfejlesztes.model.House;
 import unideb.webfejlesztes.model.User;
+import unideb.webfejlesztes.service.HouseService;
 import unideb.webfejlesztes.service.UserNotFoundException;
 import unideb.webfejlesztes.service.UserService;
 
@@ -18,11 +20,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private HouseService houseService;
+
     @GetMapping("/users")
     public String showUserList(Model model){
         List<User> userList = userService.listAll();
         model.addAttribute("userList", userList);
         return "users";
+    }
+    //ResponseEntity<?>
+    @GetMapping("/users/{id}/houses")
+    public String showUserHouses(@PathVariable String id, Model model){
+//        return ResponseEntity.ok(houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id))));
+        List<House> houseList = houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id)));
+        model.addAttribute("houseList", houseList);
+        return "houses";
+
     }
 
     @GetMapping("/users/new")
