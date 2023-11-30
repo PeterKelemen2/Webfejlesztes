@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="text-center"><h2>Add new user</h2></div>
-    <form th:action="@{/users/save}" method="post" th:object="${user}" style="max-width: 500px; margin: 0 auto;">
+    <div class="text-center p-6"><h2>Fill out new user info</h2></div>
+    <form th:action="@{/users/save}" method="post" th:object="${user}" style="max-width: 250px; margin: 0 auto;">
         <div class="border border-secondary rounded p-3">
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Username</label>
-                <div class="col-sm-8">
-                    <input type="text" placeholder="Username" th:field="*{username}" class="form-control">
+<!--                <label class="col-sm-2 col-form-label text-sm-center"></label>-->
+                <div >
+                    <input type="text" placeholder="Username" th:field="*{username}" class="form-control" required minlength="8">
                 </div>
             </div>
         </div>

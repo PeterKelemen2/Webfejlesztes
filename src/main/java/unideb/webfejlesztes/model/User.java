@@ -21,8 +21,8 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
-    private String password;
+//    @Column(nullable = false)
+//    private String password;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<House> houses;
