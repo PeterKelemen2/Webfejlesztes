@@ -17,17 +17,23 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void save(User user) {
-        userRepository.save(user);
-    }
-
-
     public User getUserById(long l) {
         return userRepository.findById(l).orElse(null);
     }
 
+    public void save(User user) {userRepository.save(user);}
+
+    public void createUser(UserDTO body) {
+        User newUser = new User(
+                body.name());
+        userRepository.save(newUser);
+    }
+
+
     public void deleteUserById(long l) {
         userRepository.deleteById(l);
     }
+
+
 }
 

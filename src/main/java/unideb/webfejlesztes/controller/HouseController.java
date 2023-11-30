@@ -18,7 +18,6 @@ public class HouseController {
     @GetMapping("/house-list")
     public ResponseEntity<?> getHouses(){
         var h = houseService.getHouse();
-        log.info("anyad: {}", h);
         return ResponseEntity.ok(h.stream()
                 .map(HouseDTO::fromDao).toList());
     }

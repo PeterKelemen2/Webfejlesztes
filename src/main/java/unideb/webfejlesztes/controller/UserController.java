@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import unideb.webfejlesztes.dto.UserDTO;
 import unideb.webfejlesztes.model.User;
 import unideb.webfejlesztes.service.UserService;
@@ -30,19 +31,26 @@ public class UserController {
     }
 
     @PostMapping("/users/save")
-    public String saveUser(User user){
+    public String saveUser(User user, RedirectAttributes ra){
         userService.save(user);
+
+        ra.addFlashAttribute("message", "The user has been saved successfully!");
         return "redirect:/users";
     }
 
-    @GetMapping("/get/{id}")
+    @PostMapping("/users/create")
+    public void createUser(@RequestBody UserDTO body){
+        userService.createUser(body);
+    }
+
+    @GetMapping("/users/get/{id}")
     public ResponseEntity<?> getUser(@PathVariable String id){
         var user = userService.getUserById(Long.parseLong(id));
         if (user == null) throw new RuntimeException("Error");
         return ResponseEntity.ok(UserDTO.fromDao(user));
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/users/update/{id}")
     public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserDTO body){
         var user = userService.getUserById(Long.parseLong(id));
         if (user == null) throw new RuntimeException("Error");
@@ -53,7 +61,7 @@ public class UserController {
         return ResponseEntity.ok(UserDTO.fromDao(user));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/users/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable String id){
         userService.deleteUserById(Long.parseLong(id));
         return ResponseEntity.ok().build();

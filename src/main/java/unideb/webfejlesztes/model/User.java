@@ -27,4 +27,7 @@ public class User {
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<House> houses;
 
+    public User(String username){
+        this.username = username;
+    }
 }

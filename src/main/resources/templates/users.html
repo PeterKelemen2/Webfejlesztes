@@ -15,14 +15,29 @@
     <div class="m-5">
         <a class="h3" th:href="@{/users/new}">Add new User</a>
     </div>
+
+
+    <div th:if="${message}" class="alert-success"
+         style="
+         display: flex;
+         justify-content: center;
+         align-content: center;
+         min-height: 30px;
+         max-width: 400px;
+         margin: 20px auto;
+         padding: 10px 10px 10px 10px;
+         border-radius: 4px;
+    ">
+        [[${message}]]
+    </div>
     <div>
         <table class="table table-bordered">
             <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
             <th:block th:each="user : ${userList}">
