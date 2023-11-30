@@ -13,7 +13,7 @@
         <h2 style="color: white">Houses</h2>
     </div>
     <div class="m-5">
-<!--        <a class="h3" th:href="@{/users/new}" style="color: #678ff1">Add new User</a>-->
+                <a class="h3" th:href="@{/houses/new}" style="color: #678ff1">Add new House</a>
     </div>
 
     <div>
@@ -36,20 +36,20 @@
     <div>
         <table class="table table-bordered"
                style="
-               max-width: 700px;
+               max-width: 900px;
                margin: 30px auto;
                background: #1e1e1e;
                color: white">
             <thead class="table-dark">
             <tr>
                 <th style="width: 50px; text-align: center">ID</th>
-                <th style="width: 50px; text-align: center">Address</th>
+                <th style="width: 100px; text-align: center">Address</th>
                 <th style="width: 50px; text-align: center">House Nr</th>
                 <th style="width: 50px; text-align: center">ZIP Code</th>
-                <th style="width: 50px; text-align: center">Value</th>
+                <th style="width: 70px; text-align: center">Value</th>
                 <th style="width: 50px; text-align: center">Area</th>
 
-<!--                <th style="width: 350px; text-align: center">Operations</th>-->
+                <th style="width: 80px; text-align: center">Operations</th>
             </tr>
             </thead>
             <tbody>
@@ -61,11 +61,10 @@
                     <td style="width: 50px; text-align: center">[[${house.zip}]]</td>
                     <td style="width: 50px; text-align: center">[[${house.price}]]</td>
                     <td style="width: 50px; text-align: center">[[${house.area}]]</td>
-<!--                    <td style="width: 350px; text-align: center">-->
-<!--                        <a class="h4" th:href="@{'/users/edit/' + ${user.getId()}}" style="margin-right: 3em">Edit</a>-->
-<!--                        <a class="h4" th:href="@{'/users/delete/' + ${user.getId()}}">Delete</a>-->
-<!--                        <a class="h4" style="margin-left: 3em">Show houses</a>-->
-<!--                    </td>-->
+                    <td style="width: 80px; text-align: center">
+                        <a class="h4" th:href="@{'/houses/edit/' + ${house.id}}" style="margin-right: 3em">Edit</a>
+                        <a class="h4" th:href="@{'/houses/delete/' + ${house.id}}">Delete</a>
+                    </td>
                 </tr>
             </th:block>
             </tbody>
