@@ -7,13 +7,13 @@
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
           crossorigin="anonymous">
 </head>
-<body>
+<body style="background: #3d3d3d">
 <div class="container-fluid text-center">
     <div>
-        <h2>Manage users</h2>
+        <h2 style="color: white">Manage users</h2>
     </div>
     <div class="m-5">
-        <a class="h3" th:href="@{/users/new}">Add new User</a>
+        <a class="h3" th:href="@{/users/new}" style="color: #678ff1">Add new User</a>
     </div>
 
 
@@ -31,22 +31,28 @@
         [[${message}]]
     </div>
     <div>
-        <table class="table table-bordered">
+        <table class="table table-bordered"
+               style="
+               max-width: 700px;
+               margin: 30px auto;
+               background: #1e1e1e;
+               color: white">
             <thead class="table-dark">
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th></th>
+                <th style="width: 50px; text-align: center">ID</th>
+                <th style="width: 250px; text-align: center">Name</th>
+                <th style="width: 350px; text-align: center">Operations</th>
             </tr>
             </thead>
             <tbody>
             <th:block th:each="user : ${userList}">
                 <tr>
-                    <td>[[${user.id}]]</td>
-                    <td>[[${user.username}]]</td>
-                    <td>
+                    <td style="width: 50px; text-align: center">[[${user.id}]]</td>
+                    <td style="width: 250px; text-align: center">[[${user.username}]]</td>
+                    <td style="width: 350px; text-align: center">
                         <a class="h4" th:href="@{'/users/edit/' + ${user.getId()}}" style="margin-right: 3em">Edit</a>
                         <a class="h4" th:href="@{'/users/delete/' + ${user.getId()}}">Delete</a>
+                        <a class="h4" style="margin-left: 3em">Show houses</a>
                     </td>
                 </tr>
             </th:block>
