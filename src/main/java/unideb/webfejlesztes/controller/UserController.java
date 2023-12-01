@@ -38,6 +38,7 @@ public class UserController {
 //        return ResponseEntity.ok(houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id))));
         List<House> houseList = houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id)));
         model.addAttribute("houseList", houseList);
+        model.addAttribute("user_id", Long.parseLong(id));
         return "houses";
 
     }
@@ -45,7 +46,7 @@ public class UserController {
     @GetMapping("/users/{id}/houses/new")
     public String showNewHouseForm(@PathVariable String id, Model model) {
         model.addAttribute("house", new House());
-//        model.addAttribute("user_id", Long.parseLong(id));
+        model.addAttribute("user_id", Long.parseLong(id));
         model.addAttribute("pageTitle", "Add new House");
         return "house_form";
     }
@@ -67,12 +68,10 @@ public class UserController {
 
     @PostMapping("/users/{id}/houses/save")
     public String saveHouse(Model model, House house, RedirectAttributes ra, @PathVariable String id) {
-        model.addAttribute("owner", id);
-
+        //model.addAttribute("user_id", id);
         house.setOwner(userService.getUserById(Long.parseLong(id)));
 
         houseService.save(house);
-
 
         ra.addFlashAttribute("message", "House saved successfully!");
         return "redirect:/users/{id}/houses";
