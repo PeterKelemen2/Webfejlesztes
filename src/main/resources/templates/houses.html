@@ -12,11 +12,11 @@
     <div>
         <h2 style="color: white">Houses</h2>
     </div>
-    <div class="m-5">
-        <a th:href="@{/users/${user_id}/houses/new}" class="h3" style="color: #678ff1">Add new House</a>
+    <div class="m-5" style="margin-top: 20px">
+        <a th:href="@{/users/{user_id}/houses/new(user_id=${#strings.toString(user_id)})}" class="h3" style="color: #678ff1">Add new House</a>
     </div>
 
-    <div>
+    <div style="margin-top: 15px">
         <a class="h4" th:href="@{/users}" style="color: #678ff1">Back</a>
     </div>
 
@@ -62,8 +62,11 @@
                     <td style="width: 50px; text-align: center">[[${house.price}]]</td>
                     <td style="width: 50px; text-align: center">[[${house.area}]]</td>
                     <td style="width: 80px; text-align: center">
-                        <a class="h4" th:href="@{'/houses/edit/' + ${house.id}}" style="margin-right: 3em">Edit</a>
-                        <a class="h4" th:href="@{'/houses/delete/' + ${house.id}}">Delete</a>
+                        <a class="h4" th:href="@{/users/{user_id}/houses/edit/{house_id}
+                        (house_id=${#strings.toString(house.id)}, user_id=${#strings.toString(user_id)})}" style="margin-right: 3em">Edit</a>
+                        <a class="h4" th:href="@{/users/{id}/house/delete/{house_id}(house_id=${house.id}, id=${user_id})}"
+                           th:method="delete">Delete</a>
+
                     </td>
                 </tr>
             </th:block>
@@ -72,6 +75,4 @@
     </div>
 </div>
 </body>
-
-
 </html>

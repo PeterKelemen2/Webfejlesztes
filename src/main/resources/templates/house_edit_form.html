@@ -10,7 +10,7 @@
 <body style="background: #3d3d3d">
 <div class="container-fluid">
     <div class="text-center p-6" style="color: white"><h2>[[${pageTitle}]]</h2></div>
-    <form th:action="@{/users/{user_id}/houses/save(user_id=${#strings.toString(user_id)})}" method="post" th:object="${house}"
+    <form th:action="@{/users/{user_id}/houses/save/{house_id}(house_id=${#strings.toString(house.id)}, user_id=${#strings.toString(user_id)})}" method="post" th:object="${house}"
           style="max-width: 250px; margin: 0 auto;">
         <input type="hidden" th:field="*{id}">
         <div class="border border-secondary rounded p-3">

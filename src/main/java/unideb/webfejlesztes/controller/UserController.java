@@ -51,6 +51,29 @@ public class UserController {
         return "house_form";
     }
 
+    @PostMapping("/users/{id}/houses/save")
+    public String saveHouse(Model model, House house, RedirectAttributes ra, @PathVariable String id) {
+
+        house.setOwner(userService.getUserById(Long.parseLong(id)));
+        model.addAttribute("user_id", Long.parseLong(id));
+        houseService.save(house);
+
+        ra.addFlashAttribute("message", "House saved successfully!");
+        return "redirect:/users/{id}/houses";
+    }
+
+    @PostMapping("/users/{id}/houses/save/{house_id}")
+    public String saveEditedHouse(Model model, House house, RedirectAttributes ra, @PathVariable String id, @PathVariable String house_id) {
+
+        house.setOwner(userService.getUserById(Long.parseLong(id)));
+        model.addAttribute("user_id", Long.parseLong(id));
+        model.addAttribute("house_id", Long.parseLong(house_id));
+        houseService.save(house);
+
+        ra.addFlashAttribute("message", "House saved successfully!");
+        return "redirect:/users/{id}/houses";
+    }
+
     @GetMapping("/users/new")
     public String showNewForm(Model model) {
         model.addAttribute("user", new User());
@@ -66,16 +89,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/users/{id}/houses/save")
-    public String saveHouse(Model model, House house, RedirectAttributes ra, @PathVariable String id) {
-        //model.addAttribute("user_id", id);
-        house.setOwner(userService.getUserById(Long.parseLong(id)));
 
-        houseService.save(house);
-
-        ra.addFlashAttribute("message", "House saved successfully!");
-        return "redirect:/users/{id}/houses";
-    }
 
     @PostMapping("/users/create")
     public void createUser(@RequestBody UserDTO body) {
@@ -104,6 +118,23 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         userService.deleteUserById(Long.parseLong(id));
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/users/{id}/house/delete/{house_id}")
+    public ResponseEntity<?> deleteHouse(@PathVariable String id, @PathVariable String house_id) {
+        houseService.deleteHouseById(Long.parseLong(house_id));
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/users/{id}/houses/edit/{house_id}")
+    public String showHouseEditForm(@PathVariable("id") Long id, @PathVariable("house_id") Long house_id, Model model, RedirectAttributes ra){
+        House house = houseService.getHouseById(house_id);
+        model.addAttribute("house", house);
+        model.addAttribute("user_id", id);
+        model.addAttribute("house_id", house_id);
+        model.addAttribute("pageTitle", "Edit House (ID: " + house_id + ")");
+
+        return "house_edit_form";
     }
 
     @GetMapping("/users/edit/{id}")
