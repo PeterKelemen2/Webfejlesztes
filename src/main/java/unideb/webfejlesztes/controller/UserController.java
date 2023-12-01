@@ -124,8 +124,8 @@ public class UserController {
     public String deleteHouse(@PathVariable String id, @PathVariable String house_id, RedirectAttributes ra) {
         houseService.deleteHouseById(Long.parseLong(house_id));
         ra.addFlashAttribute("message", "The House ID " + id + " has been deleted.");
-        return "redirect:/users/{id}/houses";
 
+        return "redirect:/users/{id}/houses";
     }
 
     @GetMapping("/users/{id}/houses/edit/{house_id}")
