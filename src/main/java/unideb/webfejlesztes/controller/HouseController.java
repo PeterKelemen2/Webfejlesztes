@@ -4,8 +4,11 @@ import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import unideb.webfejlesztes.dto.HouseDTO;
+import unideb.webfejlesztes.model.House;
+import unideb.webfejlesztes.model.User;
 import unideb.webfejlesztes.service.HouseService;
 
 @Slf4j
@@ -25,6 +28,13 @@ public class HouseController {
     @PostMapping("/create")
     public void createHouse(@RequestBody HouseDTO body) {
         houseService.createHouse(body);
+    }
+
+    @GetMapping("/new")
+    public String showNewForm(Model model){
+        model.addAttribute("house", new House());
+        model.addAttribute("pageTitle", "Add New house");
+        return "house_form";
     }
 
     @GetMapping("/get/{id}")
@@ -51,5 +61,9 @@ public class HouseController {
     public ResponseEntity<?> deleteHouse(@PathVariable String id) {
         houseService.deleteHouseById(Long.parseLong(id));
         return ResponseEntity.ok().build();
+    }
+
+    public void saveHouse(){
+
     }
 }

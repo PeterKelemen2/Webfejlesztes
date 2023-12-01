@@ -1,5 +1,6 @@
 package unideb.webfejlesztes.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import unideb.webfejlesztes.service.UserService;
 
 import java.util.List;
 
+
 @Controller
 public class UserController {
     @Autowired
@@ -24,14 +26,15 @@ public class UserController {
     private HouseService houseService;
 
     @GetMapping("/users")
-    public String showUserList(Model model){
+    public String showUserList(Model model) {
         List<User> userList = userService.listAll();
         model.addAttribute("userList", userList);
         return "users";
     }
+
     //ResponseEntity<?>
     @GetMapping("/users/{id}/houses")
-    public String showUserHouses(@PathVariable String id, Model model){
+    public String showUserHouses(@PathVariable String id, Model model) {
 //        return ResponseEntity.ok(houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id))));
         List<House> houseList = houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id)));
         model.addAttribute("houseList", houseList);
@@ -39,35 +42,56 @@ public class UserController {
 
     }
 
+    @GetMapping("/users/{id}/houses/new")
+    public String showNewHouseForm(@PathVariable String id, Model model) {
+        model.addAttribute("house", new House());
+//        model.addAttribute("user_id", Long.parseLong(id));
+        model.addAttribute("pageTitle", "Add new House");
+        return "house_form";
+    }
+
     @GetMapping("/users/new")
-    public String showNewForm(Model model){
+    public String showNewForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("pageTitle", "Add New User");
         return "user_form";
     }
 
     @PostMapping("/users/save")
-    public String saveUser(User user, RedirectAttributes ra){
+    public String saveUser(User user, RedirectAttributes ra) {
         userService.save(user);
 
-        ra.addFlashAttribute("message", "The user has been saved successfully!");
+        ra.addFlashAttribute("message", "User saved successfully!");
         return "redirect:/users";
     }
 
+    @PostMapping("/users/{id}/houses/save")
+    public String saveHouse(Model model, House house, RedirectAttributes ra, @PathVariable String id) {
+        model.addAttribute("owner", id);
+
+        house.setOwner(userService.getUserById(Long.parseLong(id)));
+
+        houseService.save(house);
+
+
+        ra.addFlashAttribute("message", "House saved successfully!");
+        return "redirect:/users/{id}/houses";
+    }
+
     @PostMapping("/users/create")
-    public void createUser(@RequestBody UserDTO body){
+    public void createUser(@RequestBody UserDTO body) {
         userService.createUser(body);
     }
 
     @GetMapping("/users/get/{id}")
-    public ResponseEntity<?> getUser(@PathVariable String id){
+    public ResponseEntity<?> getUser(@PathVariable String id) {
         var user = userService.getUserById(Long.parseLong(id));
         if (user == null) throw new RuntimeException("Error");
         return ResponseEntity.ok(UserDTO.fromDao(user));
     }
 
     @PutMapping("/users/update/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserDTO body){
+    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserDTO body) {
         var user = userService.getUserById(Long.parseLong(id));
         if (user == null) throw new RuntimeException("Error");
 
@@ -78,7 +102,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable String id){
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
         userService.deleteUserById(Long.parseLong(id));
         return ResponseEntity.ok().build();
     }

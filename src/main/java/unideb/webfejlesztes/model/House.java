@@ -16,7 +16,6 @@ public class House {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String address;
-    @Column(unique = true)
     private int houseNum;
     private int zip;
     private int price;
