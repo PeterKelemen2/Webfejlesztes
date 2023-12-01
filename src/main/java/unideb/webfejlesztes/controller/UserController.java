@@ -120,10 +120,12 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/users/{id}/house/delete/{house_id}")
-    public ResponseEntity<?> deleteHouse(@PathVariable String id, @PathVariable String house_id) {
+    @GetMapping("/users/{id}/house/delete/{house_id}")
+    public String deleteHouse(@PathVariable String id, @PathVariable String house_id, RedirectAttributes ra) {
         houseService.deleteHouseById(Long.parseLong(house_id));
-        return ResponseEntity.ok().build();
+        ra.addFlashAttribute("message", "The House ID " + id + " has been deleted.");
+        return "redirect:/users/{id}/houses";
+
     }
 
     @GetMapping("/users/{id}/houses/edit/{house_id}")
