@@ -1,6 +1,5 @@
 package unideb.webfejlesztes.controller;
 
-import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import unideb.webfejlesztes.dto.HouseDTO;
 import unideb.webfejlesztes.model.House;
-import unideb.webfejlesztes.model.User;
 import unideb.webfejlesztes.service.HouseService;
 
 @Slf4j
@@ -63,7 +61,4 @@ public class HouseController {
         return ResponseEntity.ok().build();
     }
 
-    public void saveHouse(){
-
-    }
 }

@@ -1,7 +1,6 @@
 package unideb.webfejlesztes.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,10 +15,10 @@ public class House {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String address;
-    private int houseNum;
-    private int zip;
-    private int price;
-    private double area;
+    private Integer houseNum;
+    private Integer zip;
+    private Integer price;
+    private Double area;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

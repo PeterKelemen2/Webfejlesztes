@@ -16,31 +16,32 @@
     background-size: 100% 100%;">
 <div class="container-fluid">
     <div class="text-center p-6" style="color: white"><h2>[[${pageTitle}]]</h2></div>
-    <form th:action="@{/users/{user_id}/houses/save/{house_id}(house_id=${#strings.toString(house.id)}, user_id=${#strings.toString(user_id)})}" method="post" th:object="${house}"
+    <form th:action="@{/users/{user_id}/houses/save/{house_id}(house_id=${#strings.toString(house.id)}, user_id=${#strings.toString(user_id)})}"
+          method="post" th:object="${house}"
           style="max-width: 250px; margin: 0 auto;">
-        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{house.id}">
         <div class="border border-secondary rounded p-3">
             <div class="form-group row">
                 <div style="margin-bottom: 10px">
-                    <input type="text" placeholder="Street name" th:field="*{address}" value="" class="form-control"
+                    <input type="text" placeholder="Street name" th:field="*{house.address}" class="form-control"
                            required>
                 </div>
                 <div style="margin-bottom: 10px">
-                    <input type="text" placeholder="House Nr" th:field="*{houseNum}" value="" class="form-control"
+                    <input type="text" placeholder="House Nr" th:field="*{house.houseNum}" class="form-control"
                            required>
                 </div>
                 <div style="margin-bottom: 10px">
-                    <input type="text" placeholder="ZIP Code" th:field="*{zip}" value="" class="form-control" required>
+                    <input type="text" placeholder="ZIP Code" th:field="*{house.zip}" class="form-control" required>
                 </div>
                 <div style="margin-bottom: 10px">
-                    <input type="text" placeholder="Value" th:field="*{price}" value="" class="form-control" required>
+                    <input type="text" placeholder="Value" th:field="*{house.price}" class="form-control" required>
                 </div>
                 <div style="margin-bottom: 10px">
-                    <input type="text" placeholder="Area" th:field="*{area}" value="" class="form-control" required>
+                    <input type="text" placeholder="Area" th:field="*{house.area}" class="form-control" required>
                 </div>
-                <div style="margin-bottom: 10px">
-                    <input type="text" placeholder="User" th:field="*{area}" class="form-control">
-                </div>
+                <!--                <div style="margin-bottom: 10px">-->
+                <!--                    <input type="text" placeholder="User" th:field="*{area}" class="form-control">-->
+                <!--                </div>-->
             </div>
         </div>
 

@@ -14,12 +14,6 @@ import java.util.List;
 public class HouseService {
     private final HouseRepository houseRepository;
 
-//    public void createHouse(String address, int houseNum, int zip, int price, double area) {
-////        var existingHouse = houseRepository.getByAddress(address);
-////        if (existingHouse.isPresent()) throw new RuntimeException("error");
-//        houseRepository.save(new House(address, houseNum, zip, price, area));
-//    }
-
     public List<House> getHouse() {
         return houseRepository.findAll();
     }

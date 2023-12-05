@@ -1,6 +1,6 @@
 package unideb.webfejlesztes.controller;
 
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,10 +32,8 @@ public class UserController {
         return "users";
     }
 
-    //ResponseEntity<?>
     @GetMapping("/users/{id}/houses")
     public String showUserHouses(@PathVariable String id, Model model) {
-//        return ResponseEntity.ok(houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id))));
         List<House> houseList = houseService.getHouseByOwnerId(userService.getUserById(Long.parseLong(id)));
         model.addAttribute("houseList", houseList);
         model.addAttribute("user_id", Long.parseLong(id));
@@ -89,35 +87,9 @@ public class UserController {
         return "redirect:/users";
     }
 
-
-
     @PostMapping("/users/create")
     public void createUser(@RequestBody UserDTO body) {
         userService.createUser(body);
-    }
-
-    @GetMapping("/users/get/{id}")
-    public ResponseEntity<?> getUser(@PathVariable String id) {
-        var user = userService.getUserById(Long.parseLong(id));
-        if (user == null) throw new RuntimeException("Error");
-        return ResponseEntity.ok(UserDTO.fromDao(user));
-    }
-
-    @PutMapping("/users/update/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserDTO body) {
-        var user = userService.getUserById(Long.parseLong(id));
-        if (user == null) throw new RuntimeException("Error");
-
-        user.setUsername(body.name());
-        userService.save(user);
-
-        return ResponseEntity.ok(UserDTO.fromDao(user));
-    }
-
-    @DeleteMapping("/users/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable String id) {
-        userService.deleteUserById(Long.parseLong(id));
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/users/{id}/house/delete/{house_id}")
@@ -129,14 +101,14 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}/houses/edit/{house_id}")
-    public String showHouseEditForm(@PathVariable("id") Long id, @PathVariable("house_id") Long house_id, Model model, RedirectAttributes ra){
+    public String showHouseEditForm(@PathVariable("id") Long id, @PathVariable("house_id") Long house_id, Model model){
         House house = houseService.getHouseById(house_id);
         model.addAttribute("house", house);
         model.addAttribute("user_id", id);
         model.addAttribute("house_id", house_id);
         model.addAttribute("pageTitle", "Edit House (ID: " + house_id + ")");
 
-        return "house_edit_form";
+        return "house_form";
     }
 
     @GetMapping("/users/edit/{id}")
@@ -162,6 +134,30 @@ public class UserController {
             ra.addFlashAttribute("message", e.getMessage());
         }
         return "redirect:/users";
+    }
+
+    @GetMapping("/users/get/{id}")
+    public ResponseEntity<?> getUser(@PathVariable String id) {
+        var user = userService.getUserById(Long.parseLong(id));
+        if (user == null) throw new RuntimeException("Error");
+        return ResponseEntity.ok(UserDTO.fromDao(user));
+    }
+
+    @PutMapping("/users/update/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserDTO body) {
+        var user = userService.getUserById(Long.parseLong(id));
+        if (user == null) throw new RuntimeException("Error");
+
+        user.setUsername(body.name());
+        userService.save(user);
+
+        return ResponseEntity.ok(UserDTO.fromDao(user));
+    }
+
+    @DeleteMapping("/users/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
+        userService.deleteUserById(Long.parseLong(id));
+        return ResponseEntity.ok().build();
     }
 
 }
